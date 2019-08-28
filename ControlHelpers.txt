@@ -1,0 +1,54 @@
+zp();
+rlcheck();
+testd();
+
+// Test a for loop
+EXPORT testd(a)
+BEGIN
+  LOCAL s := 0;
+  LOCAL K;
+  LOCAL size:=DIM(a);
+  FOR K FROM 1 TO size(1) DO
+  s := s + a[K];
+  END;
+  return(s);
+END;
+
+// Get zeros and poles from coefficients in transfer function
+EXPORT zp(num,den)
+BEGIN
+  LOCAL numpoly = poly2symb(num);
+  LOCAL zeros = proot(numpoly);
+  LOCAL denpoly = poly2symb(den);
+  LOCAL poles = proot(denpoly);
+  RETURN(CONCAT(zeros, poles));
+END;
+
+// Check the angle sums of a point represented by
+// damping ratio and radius to point.
+
+// Used to determine whether the target radius for a
+// given damping ratio falls on the root locus for
+// a transfer function
+EXPORT rlcheck(num, den, damp, r)
+BEGIN
+  LOCAL numpoly = poly2symb(num);
+  LOCAL czeros = proot(numpoly);
+  LOCAL denpoly = poly2symb(den);
+  LOCAL cpoles = proot(denpoly);
+  LOCAL j,k;
+  LOCAL sizeZeros := DIM(czeros);
+  LOCAL sizePoles := DIM(cpoles);
+  LOCAL s := 0; // sum
+  LOCAL ang := 180 - ACOS(damp);
+  LOCAL damp_point := r*COS(ang) + r*SIN(ang)*i;
+  FOR j FROM 1 TO sizeZeros(1) DO
+    LOCAL cand_angle := polar_coordinates(damp_point - czeros(j));
+    s := s + cand_angle(2);
+  END;
+  FOR k FROM 1 TO sizePoles(1) DO
+    LOCAL cand_angle := polar_coordinates(damp_point - cpoles(k));
+    s := s - cand_angle(2);
+  END;
+  RETURN(s);
+END;
