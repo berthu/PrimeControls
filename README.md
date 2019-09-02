@@ -27,14 +27,17 @@ My HP Prime Helper Functions for Control Systems Analysis
   contributions of a critical point for an open-loop transfer function
   with polynomial coefficients `numerator` and `denominator` to a point given by
   damping ratio `zeta` and polar radius `radius`. This program is
-  mainly used to check whether a given complex conjugate intersects
-  the root locus.
+  mainly used to check whether a given point in the complex plane lies
+  on the root locus. The inputs `numerator` and `denominator` are row
+  matrices consisting of the coefficients of the relevant polynomials
+  in decreasing power, so [1 2 3] corresponds to the coefficients of
+  the polynomial x^2 + 2x + 3.
 
 - `rlk(numerator, denominator, complex_point)` calculates the required
   gain for the open-loop transfer function with polynomial coefficients
   `numerator` and `denominator` to realize a pole of `complex_point`,
-  expressed as `a+b*i`. For example, after using rldamp, the pole can
-  be used here as:
+  expressed as `a+b*i`. For example, after using rldamp to confirm the
+  exist of a pole, its coordinates can be converted to Cartesian via:
   
   ```
   radius*cos(180-acos(zeta)) + radius*sin(180-acos(zeta))*i
