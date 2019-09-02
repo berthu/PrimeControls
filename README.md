@@ -63,13 +63,16 @@ can search the line at angle `\pi - acos(0.707)` for different values
 of `radius` with the command
 ```
 rldamp([1 3 2],[1 -3 2],0.707,sqrt(2)]
-									-180.0
+                                    -180.0
 ```
 This implies a radius of sqrt(2) is needed for the overshoot line of
 0.707 zeta to intersect the root locus. The associated gain is
 ```
-rlk([1 3 2],[1 -3
-2],sqrt(2)*cos(180-acos(0.707))+sqrt(2)*sin(180-acos(0.707))*i)
-                                        4.9981
+rlk([1 3 2],[1 -32],sqrt(2)*cos(180-acos(0.707))+sqrt(2)*sin(180-acos(0.707))*i)
+                                    4.9981
 ```
-
+Finally, the breakaway and break-in points are
+```
+rlbreak([1 3 2],[1 -3 2])
+                                    [1.41421356237 -1.41421356237]
+```
