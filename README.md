@@ -54,12 +54,12 @@ Consider the unity feedback loop with forward transfer function
 G(s) = ------------
         (s-1)(s-2)
 ```
-Calculate the value of $K$ that yields a stable system with a pair of
-  second-order poles that have a damping ratio of $0.707$. Where are
+Calculate the value of K that yields a stable system with a pair of
+  second-order poles that have a damping ratio of 0.707. Where are
   the break-in and breakaway points?
 
 To find the damping ratio of 0.707 and find the second-order poles. We
-can search the line at angle `\pi - acos(0.707)` for different values
+can search the line at angle `pi - acos(0.707)` for different values
 of `radius` with the command
 ```
 rldamp([1 3 2],[1 -3 2],0.707,sqrt(2)]
