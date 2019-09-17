@@ -13,13 +13,21 @@ My HP Prime Helper Functions for Control Systems Analysis
   overshoot percentage (expressed as a fraction of 1)
 - `Overshoot(zeta)` calculates the overshoot (expressed as a fraction
   of 1) given a damping ratio
-- `PeakTime` calculates the peak time of a second-order system given a `zeta` and `omega`
+- `PeakTime(zeta,omega)` calculates the peak time of a second-order system given a `zeta` and `omega`
   input.
-- `RiseTime` calculates the rise time of a second-order system given a
+- `RiseTime(zeta,omega)` calculates the rise time of a second-order system given a
   `zeta` and `omega` input. Note the result is a third-order
   polynomial estimate due to the absence of a closed-form solution.
-- `SettlingTime` calculates the settling time of a second-order system
+- `SettlingTime(zeta,omega)` calculates the settling time of a second-order system
   given a `zeta` and `omega` input.
+- `PeakMagnitude(zeta)` calculates the peak magnitude of a second-order
+  open-loop system given `zeta` input
+- `PeakFrequency(zeta,omega)` calcaultes the frequency at the peak magnitude of a
+  second-order open-loop system given `zeta` and `omega` input
+- `Bandwidth(zeta,omega)` calculates the bandwidth of a second-order open-loop
+  system given `zeta` and `omega`.
+- `PhaseMargin(zeta)` calculates the phase margin of a second-order
+  open-loop system given `zeta`.
 
 ### RootLocus
 
@@ -49,7 +57,30 @@ My HP Prime Helper Functions for Control Systems Analysis
   accomplishes this by solving for the zeros of dK/ds =
   d(-P(s)/Q(s))/ds, where T(s) = Q(s)/P(s). 
 
-#### Root Locus - Integrated Example
+### Frequency Response
+- `ReImParts(expression)` generates a list where the first entry is
+  the real component and second entry is the imaginary component of
+  any expression. 
+- `Mag(expression)` calculates the magnitude of a frequency response function
+- `Phase(expression)` calculates the phase of a frequency
+  response function
+- `FreqResponseEval(num, den, omega)` evaluates the frequency
+  response G(j*omega) of  a transfer function with `num`,`den` being
+  the coefficients of its numerator and denominator respectively
+- `MagContrib(num, den, omega)` evaluates the magnitude of a frequency
+  response given a frequency `omega` and transfer function coefficients
+- `PhaseContrib(num, den, omega)` evaluates the phase of a frequency
+  response given a frequency `omega` and transfer function
+  coefficients
+  
+
+### Third Party Software
+The following are mirrors of applications from the HP Developer website:
+
+- Control Systems Application
+- Routh Hurwitz
+
+### Root Locus - Integrated Example
 
 Consider the unity feedback loop with forward transfer function
 ```
@@ -79,3 +110,31 @@ Finally, the breakaway and break-in points are
 rlbreak([1 3 2],[1 -3 2])
                                     [1.41421356237 -1.41421356237]
 ```
+
+![img](./img/rl1.png)
+
+### Frequency Response - Integrated Example
+Consider the unity feedback system with the forward transfer function
+```
+              6
+G(s) = ---------------
+       (s^2+2s+2)(s+2)
+```
+Find the gain and phase margin.
+
+To find the gain margin, we first find where the Nyquist diagram
+crosses the real axis for frequency between 0 and positive infinity.
+
+We can do this by first evaluating the frequency response with a
+variable, converting it to complex form, and setting the imaginary
+part equal to zero and solving the the real part. We get a real part
+of -0.3. Thus K can be increased 3.33 before the real part becomes -1,
+and the gain margin Gm = 20 log 3.33 = 10.45 dB.
+
+The phase margin can be found by searching positive frequencies that
+give a magnitude of unity. This frequency of 1.253 rad/s is then used to calculate
+the total phase contribution, which is -112.3 degrees. This results in
+a phase margin of -180 - (-112.3) = 67.7 degrees.
+
+![img](./img/freq1.png)
+![img](./img/freq2.png)
