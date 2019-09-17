@@ -111,7 +111,7 @@ rlbreak([1 3 2],[1 -3 2])
                                     [1.41421356237 -1.41421356237]
 ```
 
-![img](./img/rl1.png)
+![img](./img/rl.png)
 
 ### Frequency Response - Integrated Example
 Consider the unity feedback system with the forward transfer function
