@@ -1,6 +1,8 @@
 # ControlsHelpers
 My HP Prime Helper Functions for Control Systems Analysis
 
+![img](./img/main.png)
+
 ## Directions
 1. Update your firmware. 
 2. Drag the `*.hpprgm` into Programs directory. 
