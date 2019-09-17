@@ -67,10 +67,10 @@ My HP Prime Helper Functions for Control Systems Analysis
 - `FreqResponseEval(num, den, omega)` evaluates the frequency
   response G(j*omega) of  a transfer function with `num`,`den` being
   the coefficients of its numerator and denominator respectively
-- `MagContrib(num, den, omega)` evaluates the magnitude of a frequency
-  response given a frequency `omega` and transfer function coefficients
-- `PhaseContrib(num, den, omega)` evaluates the phase of a frequency
-  response given a frequency `omega` and transfer function
+- `MagContrib(num, den, c)` evaluates the magnitude of a frequency
+  response given a complex point `c` and transfer function coefficients
+- `PhaseContrib(num, den, c)` evaluates the phase of a frequency
+  response given a complex point `c` and transfer function
   coefficients
   
 
